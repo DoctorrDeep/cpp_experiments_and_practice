@@ -1,4 +1,4 @@
-// Variables
+// User inputs
 // run with
 // g++ user_input.c -o u_in && ./u_in
 #include <iostream>

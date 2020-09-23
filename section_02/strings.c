@@ -1,4 +1,4 @@
-// Variables
+// Strings
 // run with
 // g++ strings.c -o strss && ./strss
 #include <iostream>
