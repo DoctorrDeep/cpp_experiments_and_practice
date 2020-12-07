@@ -8,10 +8,10 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/das/Documents/ambars_cpp_experiments/udacity_practice/hello/a.out",
+            "program": "${workspaceFolder}/udacity_practice/a.out",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "/home/das/Documents/ambars_cpp_experiments/udacity_practice/hello/",
+            "cwd": "${workspaceFolder}/udacity_practice/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -23,6 +23,5 @@
                 }
             ]
         }
-        
     ]
 }
