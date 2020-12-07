@@ -32,5 +32,10 @@ int main() {
   cout << "MyIteratorReferenceAdder output = \n"
        << MyIteratorReferenceAdder(v) << "\n";
 
-    cout << "Adding vector using accumulate :" <<accumulate(v.begin(), v.end(), 0) << "\n";
+  cout << "Adding vector using accumulate :"
+       << accumulate(v.begin(), v.end(), 0) << "\n";
+
+  v.push_back(100);
+  cout << "MyIteratorReferenceAdder output with 100 at the end = \n"
+       << MyIteratorReferenceAdder(v) << "\n";
 }
