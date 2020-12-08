@@ -54,9 +54,8 @@ vector<State> ReadNumbersFromLine(const string &line) {
 vector<vector<State>> ReadBoardFile(const string &filePath,
                                     const string &fileName) {
   vector<vector<State>> board;
-  
   string fileLocation = filePath + "/" + fileName;
-  ifstream my_file (fileLocation);
+  ifstream my_file(fileLocation);
   if (my_file) {
     cout << "The file stream has been created\n";
     string line;
