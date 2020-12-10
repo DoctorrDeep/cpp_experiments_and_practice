@@ -11,10 +11,19 @@ using std::sort;
 using std::string;
 using std::vector;
 
-enum class State { kEmpty, kObstacle, kClosed, kPath };
+constexpr bool debug_mode{true};
+
+enum class State { kEmpty, kObstacle, kClosed, kPath, kStart, kFinish };
+
+// Directional deltas (UP, DOWN, RIGHT, LEFT)
+const int delta[4][2]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 string CellString(const State &cell) {
   switch (cell) {
+  case State::kStart:
+    return "🚦 ";
+  case State::kFinish:
+    return "🏁 ";
   case State::kObstacle:
     return "⛰️   ";
   case State::kClosed:
@@ -78,6 +87,29 @@ void AddToOpen(const int &x, const int &y, const int &g, const int &h,
   grid[x][y] = State::kClosed;
 }
 
+// open nodes <-> grid <-> check next
+void ExpandNeighbors(vector<int> &current_node, vector<vector<int>> &open,
+                     vector<vector<State>> &grid, const int goal[2]) {
+
+  const int x = current_node[0];
+  const int y = current_node[1];
+
+  vector<vector<int>> neighbors{};
+
+  for (int i = 0; i < 4; i++) {
+    neighbors.push_back({x + delta[i][0], y + delta[i][1]});
+  }
+
+  for (vector<int> a_neighbor : neighbors) {
+    if (CheckValidCell(a_neighbor[0], a_neighbor[1], grid)) {
+      int g = current_node[2] + 1;
+      int h = Heuristic(a_neighbor[0], a_neighbor[1], goal[0], goal[1]);
+
+      AddToOpen(a_neighbor[0], a_neighbor[1], g, h, open, grid);
+    }
+  }
+}
+
 // The A* search algorithm
 vector<vector<State>> Search(vector<vector<State>> grid, const int init[2],
                              const int goal[2]) {
@@ -104,17 +136,21 @@ vector<vector<State>> Search(vector<vector<State>> grid, const int init[2],
 
     // Check if we're done.
     if (x == goal[0] && y == goal[1]) {
+      // Mark the start and finish points
+      grid[init[0]][init[1]] = State::kStart;
+      grid[goal[0]][goal[1]] = State::kFinish;
       return grid;
-    }
-    // else {
-    // ExpandNeighbors
-    // }
-  }
+    } else {
+      ExpandNeighbors(current, open, grid, goal);
 
-  // TODO: remove placeholder before final version
-  cout << "No path found!"
-       << "\n";
-  return std::vector<vector<State>>{};
+      if (debug_mode) {
+        cout << "\n\nIntermediate solution\n";
+        BoardPrinter(grid);
+      }
+    }
+  }
+  cout << "No path found!\n";
+  return vector<vector<State>>{};
 }
 
 // Convert string form of each line to enum State type
@@ -161,13 +197,14 @@ int main() {
   int init[2]{0, 0};
   int goal[2]{4, 5};
 
-  // Compute the path using A* from start to goal
-  auto solution = Search(board, init, goal);
-
   // Graphically print the problem and its solution in the terminal
   BoardDetails(board);
   cout << "This is what the board looks like right now!\n";
   BoardPrinter(board);
+
+  // Compute the path using A* from start to goal
+  auto solution = Search(board, init, goal);
+
   cout << "\nThe solution to the maze from A* search is as follows\n";
   BoardPrinter(solution);
 }
