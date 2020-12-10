@@ -50,19 +50,30 @@ int Heuristic(int x1, int y1, int x2, int y2) {
 }
 
 // Compare between f (g+h) values of open nodes
-bool Compare(vector<int> node1, vector<int> node2) {
-  int f1 = node1[2] + node1[3];
-  int f2 = node2[2] + node2[3];
-  return f1 > f2;
+// 3rd value in vector (ind 2) is the g value
+// 4th value in vector (ind 3) is the h value
+bool Compare(const vector<int> &node1, const vector<int> &node2) {
+  return (node1[2] + node1[3]) > (node2[2] + node2[3]);
 }
 
 // Sort the two-dimensional vector of ints in descending order.
 void CellSort(vector<vector<int>> *v) { sort(v->begin(), v->end(), Compare); }
 
+// Check if a cell(by indices) is on the grid
+// and has value KEmpty i.e. open to be travelled on
+bool CheckValidCell(const int &x, const int &y,
+                    const vector<vector<State>> &grid) {
+  const int count_rows = grid.size();
+  const int count_columns = grid[0].size();
+  if (0 <= x && x < count_rows && 0 <= y && y < count_columns)
+    return grid[x][y] == State::kEmpty;
+  return false;
+}
+
 // Add a node (x row,y column, g value, h value)
 // to the open list and mark it as open.
-void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &open_nodes,
-               vector<vector<State>> &grid) {
+void AddToOpen(const int &x, const int &y, const int &g, const int &h,
+               vector<vector<int>> &open_nodes, vector<vector<State>> &grid) {
   open_nodes.push_back(vector<int>{x, y, g, h});
   grid[x][y] = State::kClosed;
 }
@@ -106,8 +117,8 @@ vector<vector<State>> Search(vector<vector<State>> grid, const int init[2],
   return std::vector<vector<State>>{};
 }
 
-// Convert string form of each line to state and
-// return the vector of State enums
+// Convert string form of each line to enum State type
+// and return the grid (vector of vectors of State enums)
 vector<State> ReadStatesFromLine(const string &line) {
   istringstream my_stream(line);
   int n;
