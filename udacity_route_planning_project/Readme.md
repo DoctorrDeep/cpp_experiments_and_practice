@@ -18,7 +18,7 @@ sudo apt install libgraphicsmagick1-dev;
 sudo apt install libpng-dev;
 git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl;
 cd ~/Documents/P0267_RefImpl;
-vim ~/Documents/P0267_RefImpl;
+vim ~/Documents/P0267_RefImpl/CMakeLists.txt;
 ```
 Remove the following lines (L38-L40)
 ```
