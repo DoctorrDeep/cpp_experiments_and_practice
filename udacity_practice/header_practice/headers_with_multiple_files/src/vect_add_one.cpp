@@ -2,6 +2,6 @@
 
 void AddOneToEach(vector<int> &v) {
   for (auto &i : v) {
-    i+=7;
+    i += 7;
   }
 }
