@@ -12,6 +12,6 @@ void Car::PrintCarData() {
 void Car::IncrementDistance() { distance++; }
 
 void Sedan::PrintDoorData() {
-  cout << "The Sedan (car number " << Car::number << ") has " << door_count
-       << " doors.\n";
+  cout << "The Sedan (car number " << this->Car::number << ") has "
+       << this->door_count << " doors.\n"; // Note the usage of `this`!
 }
