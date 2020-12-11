@@ -57,4 +57,4 @@ cd ~/Documents/CppND-Route-Planning-Project/build;
 ./OSM_A_star_search;
 ```
 
-<img src="map.png" width="800" height="540" />
+<img src="setup_success.png" width="800" height="540" />
