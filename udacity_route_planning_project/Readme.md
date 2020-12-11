@@ -37,6 +37,8 @@ sudo make install;
 
 #### Udacity project repo
 
+TODO:Maybe its best to fork the Udacity project?
+
 ```
 cd ~/Documents;
 git clone git@github.com:udacity/CppND-Route-Planning-Project.git --recurse-submodules
@@ -45,3 +47,14 @@ mkdir ~/Documents/CppND-Route-Planning-Project/build;
 cd ~/Documents/CppND-Route-Planning-Project/build;
 cmake ..;
 make;
+```
+
+## Check if the installation was successful
+
+```
+cd ~/Documents/CppND-Route-Planning-Project/build;
+./test;
+./OSM_A_star_search;
+```
+
+<img src="map.png" width="800" height="540" />
