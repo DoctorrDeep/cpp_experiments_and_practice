@@ -24,7 +24,7 @@ int main() {
     car_vect.push_back(cp);
   }
 
-  // Move each car forward by 1.
+  // Move each car forward by 2.
   for (Car *cp : car_vect) {
     cp->IncrementDistance();
     (*cp).IncrementDistance(); // This statement is the same as the (->) arrow
@@ -34,5 +34,9 @@ int main() {
   // Print data about each car.
   for (Car *cp : car_vect) {
     cp->PrintCarData();
+    cout << "public property car, car number " << cp->number << "\n\n";
+
+    // will not work since color is a private property
+    // cout << "private property car color " << cp->color << "\n";
   }
 }
