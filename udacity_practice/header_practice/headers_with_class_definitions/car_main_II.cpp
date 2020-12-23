@@ -20,13 +20,15 @@ int main() {
   // Create 100 cars with different colors and
   // push pointers to each of those cars into the vector.
   for (int i = 20; i <= 40; i++) {
-    cp = new Car(colors[i % 3], i + 1, (i + 1) * 5);
+    cp = new Car(colors[i % 3], i, (i + 1) * 5);
     car_vect.push_back(cp);
   }
 
   // Move each car forward by 1.
   for (Car *cp : car_vect) {
     cp->IncrementDistance();
+    (*cp).IncrementDistance(); // This statement is the same as the (->) arrow
+                               // statement above
   }
 
   // Print data about each car.

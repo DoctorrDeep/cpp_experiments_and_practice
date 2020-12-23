@@ -4,12 +4,12 @@
 #include <vector>
 using std::vector;
 
-/* Option 1 : where the inout arguments are not named
+/* Option 1 : where the input arguments are not named
 int IncrementAndComputeVectorSum(vector<int>);
 void AddOneToEach(vector<int>&);
 */
 
-// Option 2 : where the inouts are named!
+// Option 2 : where the input arguments are named!
 int IncrementAndComputeVectorSum(vector<int> v);
 void AddOneToEach(vector<int> &v);
 

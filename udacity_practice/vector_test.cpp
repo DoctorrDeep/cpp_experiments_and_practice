@@ -5,15 +5,19 @@ using std::cout;
 using std::vector;
 
 int main() {
+
+  // Example 1
   auto k_1 = 5;
   auto k_2 = {1, 2, 3};
 
   cout << k_1 << "\n";
 
+  // Example 2
   for (auto i : k_2)
     cout << i << " ";
   cout << "\n";
 
+  // Example 3,4
   vector<int> v_1{1, 2, 3};
   vector<int> v_11;
   v_11 = {6, 8};
@@ -29,6 +33,7 @@ int main() {
   cout << "We vectored!"
        << " In 1D.\n";
 
+  // Example 5
   vector<vector<int>> v_2{{11, 22}, {33, 44}};
 
   for (auto i : v_2) {

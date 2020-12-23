@@ -7,9 +7,9 @@ int *AddOne(int &j) {
   j++;
   int k = j;
   cout << "j is " << j << "\n";
-  cout << "j is saved at " << &j << "\n";
+  cout << "j is saved at " << &j << "\n\n";
   cout << "k is " << k << "\n";
-  cout << "k is saved at " << &k << "\n";
+  cout << "k is saved at " << &k << "\n\n";
 
   return &j;
   // return &k;
@@ -22,7 +22,7 @@ int *AddOne(int &j) {
 int main() {
   int i = 1;
   cout << "The value of i is: " << i << "\n";
-  cout << "i is saved at " << &i << "\n";
+  cout << "i is saved at " << &i << "\n\n";
 
   // Declare a pointer and initialize to the value
   // returned by AddOne:
@@ -30,4 +30,6 @@ int main() {
   cout << "The value of i is now: " << i << "\n";
   cout << "The value of the int pointed to by my_pointer is: " << *my_pointer
        << "\n";
+  cout << "The value of the pointer my_pointer is: " << my_pointer
+       << "\n\n";
 }
