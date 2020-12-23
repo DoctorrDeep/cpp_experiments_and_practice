@@ -15,3 +15,15 @@ void Sedan::PrintDoorData() {
   cout << "The Sedan (car number " << this->Car::number << ") has "
        << this->door_count << " doors.\n"; // Note the usage of `this`!
 }
+
+/*
+Note all of these can be used interchangeably:
+- "color" "this->color" "this->Car::color"
+- "distance" "this->distance" "this->Car::distance"
+- "number" "this->number" "this->Car::number"
+
+Similarly the IncrementDistance could have teh following too:
+- { distance++; }
+- { this->distance++; }
+- { this->Car::distance++; }
+*/
