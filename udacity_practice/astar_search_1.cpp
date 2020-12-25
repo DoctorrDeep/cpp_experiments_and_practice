@@ -80,7 +80,7 @@ bool CheckValidCell(const int &x, const int &y,
 }
 
 // Add a node (x row,y column, g value, h value)
-// to the open list and mark it as open.
+// to the open list and mark it as closed.
 void AddToOpen(const int &x, const int &y, const int &g, const int &h,
                vector<vector<int>> &open_nodes, vector<vector<State>> &grid) {
   open_nodes.push_back(vector<int>{x, y, g, h});
@@ -128,8 +128,11 @@ vector<vector<State>> Search(vector<vector<State>> grid, const int init[2],
   while (open.size() > 0) {
     // Get the next node
     CellSort(&open);
+    // Select the last (cheapest) node
     auto current = open.back();
+    // Remove the last node from the "open" nodes vector
     open.pop_back();
+    // Mark current node as part of the path
     x = current[0];
     y = current[1];
     grid[x][y] = State::kPath;
