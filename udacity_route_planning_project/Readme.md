@@ -37,11 +37,11 @@ sudo make install;
 
 #### Udacity project repo
 
-TODO:Maybe its best to fork the Udacity project?
+- Fork the main udacity repo into your own github account.
 
 ```
 cd ~/Documents;
-git clone git@github.com:udacity/CppND-Route-Planning-Project.git --recurse-submodules
+git clone git@github.com:ambardas/CppND-Route-Planning-Project.git --recurse-submodules
 cd ~/Documents/CppND-Route-Planning-Project;
 mkdir ~/Documents/CppND-Route-Planning-Project/build;
 cd ~/Documents/CppND-Route-Planning-Project/build;
