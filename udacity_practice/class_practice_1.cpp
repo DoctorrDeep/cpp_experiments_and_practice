@@ -1,3 +1,6 @@
+// Class has accessor and mutator but no constructor
+// the compiler will create a default contructor which
+// will accept no arguments when instantiating an object of the class
 #include <cassert>
 #include <iostream>
 
