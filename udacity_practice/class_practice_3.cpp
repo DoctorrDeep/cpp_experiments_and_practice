@@ -30,11 +30,14 @@ private:
 };
 
 // Date class constructor being defined outside class definition
-Date::Date(int day_, int month_, int year_) {
-  Day(day_);
-  Month(month_);
-  Year(year_);
-};
+// Note: d,m,y are local variables used only during the constructor
+// The variable values are passed to the mutator functions 
+// The variables are then forgotten
+Date::Date(int d, int m, int y) {
+  Day(d);
+  Month(m);
+  Year(y);
+}
 
 int main() {
   Date date(-1, 14, 2000);
@@ -46,4 +49,4 @@ int main() {
   assert(date.Year() == 2000);
 
   std::cout << date.Day() << "/" << date.Month() << "/" << date.Year() << "\n";
-};
+}
