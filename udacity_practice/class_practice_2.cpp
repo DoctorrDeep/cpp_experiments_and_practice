@@ -44,4 +44,4 @@ int main() {
   assert(date.Year() == 2000);
 
   std::cout << date.Day() << "/" << date.Month() << "/" << date.Year() << "\n";
-};
+}
