@@ -40,40 +40,38 @@ bool Date::IsLeapYear(int a_year) const {
 }
 
 int Date::DaysInMonth() const {
-  {
-    switch (month_) { // "month_" works because the function is private,
-                      // "Month()" would also work. See "Year()" later
+  switch (month_) { // "month_" works because the function is private,
+                    // "Month()" would also work. See "Year()" later
 
-    case 1: // January
-      return 31;
-    case 2: // February
-      if (IsLeapYear(Year()))
-        return 29;
-      else
-        return 28;
-    case 3: // March
-      return 31;
-    case 4: // April
-      return 30;
-    case 5: // May
-      return 31;
-    case 6: // June
-      return 30;
-    case 7: // July
-      return 31;
-    case 8: // August
-      return 31;
-    case 9: // September
-      return 30;
-    case 10: // October
-      return 31;
-    case 11: // November
-      return 30;
-    case 12: // December
-      return 31;
-    default:
-      return 31;
-    }
+  case 1: // January
+    return 31;
+  case 2: // February
+    if (IsLeapYear(Year()))
+      return 29;
+    else
+      return 28;
+  case 3: // March
+    return 31;
+  case 4: // April
+    return 30;
+  case 5: // May
+    return 31;
+  case 6: // June
+    return 30;
+  case 7: // July
+    return 31;
+  case 8: // August
+    return 31;
+  case 9: // September
+    return 30;
+  case 10: // October
+    return 31;
+  case 11: // November
+    return 30;
+  case 12: // December
+    return 31;
+  default:
+    return 31;
   }
 }
 
