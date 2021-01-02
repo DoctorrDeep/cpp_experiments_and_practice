@@ -1,3 +1,5 @@
+// Static member variables
+// Experiment "static" with "const" , "constexpr", and non-constant cases
 #include <cassert>
 #include <cmath>
 #include <iostream>

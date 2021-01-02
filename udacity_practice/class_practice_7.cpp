@@ -14,7 +14,7 @@ public:
   int Year() const { return year_; }
   void Year(int year);
 
-  // Abstraction to create a string form of date without user needing to know
+  // Abstraction to create a string from of date without user needing to know
   // how it is being computed under the hood
   std::string String() const;
   std::string String_Month() const;
