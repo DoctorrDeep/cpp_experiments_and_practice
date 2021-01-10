@@ -13,6 +13,8 @@ template <typename T> T Max(T a, T b) {
 }
 
 int main() {
-  assert(Max(10, 50) == 50);
-  assert(Max(5.7, 1.436246) == 5.7);
+  assert(Max<int>(10, 50) == 50);
+  assert(Max(10, 50) == 50); // Deduced type of input
+  assert(Max<double>(5.7, 1.436246) == 5.7);
+  assert(Max(5.7, 1.436246) == 5.7); // Deduced type of input
 }
