@@ -112,6 +112,7 @@ void CPU_U::read_raw_cpu_stats() {
 }
 
 void CPU_U::compute_cpu_util() {
+  // From https://stackoverflow.com/a/23376195
   PrevIdle = previdle + previowait;
   Idle = idle + iowait;
 
