@@ -1,7 +1,7 @@
 #include <dirent.h>
 #include <unistd.h>
 
-#include <algorithm> // for all_of
+#include <algorithm> // for all_of, sort
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -83,6 +83,7 @@ public:
   string Ram();
   long int UpTime();
   void Cpu_Mem_Utime();
+  bool operator<(Process a) const ;
 
 private:
   int pid;
@@ -158,12 +159,12 @@ void Process::Cpu_Mem_Utime() {
   // int hertz = sysconf(_SC_CLK_TCK); // convert to compiletime const
   string user_file = "/proc/" + to_string(pid) + "/stat";
   string line, stat2, stat3;
-  double stat1, stat4, stat5, stat6, stat7, stat8, stat9, stat10,
-      stat11, stat12, stat13, stat14, stat15, stat16, stat17, stat18, stat19,
-      stat20, stat21, stat22, stat23, stat24, stat25, stat26, stat27, stat28,
-      stat29, stat30, stat31, stat32, stat33, stat34, stat35, stat36, stat37,
-      stat38, stat39, stat40, stat41, stat42, stat43, stat44, stat45, stat46,
-      stat47, stat48, stat49, stat50, stat51, stat52;
+  double stat1, stat4, stat5, stat6, stat7, stat8, stat9, stat10, stat11,
+      stat12, stat13, stat14, stat15, stat16, stat17, stat18, stat19, stat20,
+      stat21, stat22, stat23, stat24, stat25, stat26, stat27, stat28, stat29,
+      stat30, stat31, stat32, stat33, stat34, stat35, stat36, stat37, stat38,
+      stat39, stat40, stat41, stat42, stat43, stat44, stat45, stat46, stat47,
+      stat48, stat49, stat50, stat51, stat52;
   std::ifstream filestream(user_file);
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
@@ -186,6 +187,11 @@ void Process::Cpu_Mem_Utime() {
   }
 }
 
+
+bool Process::operator<(Process a) const {
+  return this->uptime < a.UpTime();
+}
+
 int main() {
   auto pids = Pids();
   auto uid_user_map = Uid_User_Map();
@@ -195,6 +201,10 @@ int main() {
     Process temp_process(pid, uid_user_map);
     processes.push_back(temp_process);
   }
+
+  // Test operator overloading to compare between 2 instances of process
+  // Not working yet
+  // std::sort (processes.begin(), processes.end(), );
 
   for (auto process : processes) {
     cout << process.Pid() << "\t\t";
@@ -214,4 +224,14 @@ int main() {
   // cout << process.UpTime() << "\t\t";
   // string smallcmd = process.Command();
   // cout << smallcmd.substr(0, 30) << "\n";
+
+  // Process process1(7105, uid_user_map);
+  // Process process2(7113, uid_user_map);
+  // cout << process1.UpTime() << "\t\t";
+  // cout << process2.UpTime() << "\n";
+  // cout << (process1.UpTime() < process2.UpTime()) << "\n";
+  // cout << (process1 < process2);
+
+  // cout << "\n";
+  // cout << process1.UpTime() < process2.UpTime();
 }
