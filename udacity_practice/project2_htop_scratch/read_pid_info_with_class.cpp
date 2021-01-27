@@ -97,8 +97,7 @@ long SystemUpTime() {
 
 class Process {
 public:
-  Process(int pid,
-          unordered_map<int, string> uid_user_map); // check if this is allowed
+  Process(int pid);
 
   int Pid();
   string User();
@@ -119,8 +118,8 @@ private:
   unordered_map<int, string> uid_user_map;
 };
 
-Process::Process(int pid, unordered_map<int, string> uid_user_map)
-    : pid(pid), uid_user_map(uid_user_map) {
+Process::Process(int pid)
+    : pid(pid), uid_user_map(Uid_User_Map()) {
   Cpu_Mem_Utime();
   User();
   Command();
@@ -216,7 +215,7 @@ int main() {
 
   vector<Process> processes;
   for (auto pid : pids) {
-    Process temp_process(pid, uid_user_map);
+    Process temp_process(pid);
     processes.emplace_back(temp_process);
   }
 
@@ -234,7 +233,7 @@ int main() {
     cout << smallcmd.substr(0, 30) << "\n";
   }
 
-  // Process process(4, uid_user_map);
+  // Process process(4);
   // cout << process.Pid() << "\t\t";
   // cout << process.User() << "\t\t";
   // cout << process.CpuUtilization() << "\t\t";
@@ -245,8 +244,8 @@ int main() {
   // cout << smallcmd.substr(0, 30) << "\n";
   // cout << smallc << "\n" << smallc.size() << "\n";
 
-  // Process process1(7105, uid_user_map);
-  // Process process2(7113, uid_user_map);
+  // Process process1(7105);
+  // Process process2(7113);
   // cout << process1.UpTime() << "\t\t";
   // cout << process2.UpTime() << "\n";
   // cout << (process1.UpTime() < process2.UpTime()) << "\n";
