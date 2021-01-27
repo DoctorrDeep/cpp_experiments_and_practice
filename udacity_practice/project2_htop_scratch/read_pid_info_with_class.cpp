@@ -2,7 +2,9 @@
 #include <unistd.h>
 
 #include <algorithm> // for all_of, sort
+#include <chrono>
 #include <fstream>
+#include <iomanip> // for setw, setfill
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -18,7 +20,7 @@ using std::to_string;
 using std::unordered_map;
 using std::vector;
 
-template <typename T> T getFileValue(string const &fileLoc){
+template <typename T> T getFileValue(string const &fileLoc) {
   T value;
   string line;
   std::ifstream filestream(fileLoc);
@@ -31,7 +33,8 @@ template <typename T> T getFileValue(string const &fileLoc){
   return value;
 }
 
-template <typename T> T getFileValueByKey(string const &fileLoc, string const &myKey){
+template <typename T>
+T getFileValueByKey(string const &fileLoc, string const &myKey) {
   T value;
   T temp_value;
   string line;
@@ -49,6 +52,32 @@ template <typename T> T getFileValueByKey(string const &fileLoc, string const &m
   }
   filestream.close();
   return value;
+}
+
+string ElapsedTime(long s) {
+  std::chrono::seconds seconds{s};
+
+  // return std::chrono::format("%T", seconds); // in C++20 :-)
+
+  std::chrono::hours hours =
+      std::chrono::duration_cast<std::chrono::hours>(seconds);
+
+  seconds -= std::chrono::duration_cast<std::chrono::seconds>(hours);
+
+  std::chrono::minutes minutes =
+      std::chrono::duration_cast<std::chrono::minutes>(seconds);
+
+  seconds -= std::chrono::duration_cast<std::chrono::seconds>(minutes);
+
+  std::stringstream ss{};
+
+  ss << std::setw(2) << std::setfill('0') << hours.count()    // HH
+     << std::setw(1) << ":"                                   // :
+     << std::setw(2) << std::setfill('0') << minutes.count()  // MM
+     << std::setw(1) << ":"                                   // :
+     << std::setw(2) << std::setfill('0') << seconds.count(); // SS
+
+  return ss.str();
 }
 
 // BONUS: Update this to use std::filesystem
@@ -91,9 +120,7 @@ unordered_map<int, string> Uid_User_Map() {
   return uid_user_map;
 }
 
-long SystemUpTime() {
-  return getFileValue<long>("/proc/uptime");
-}
+long SystemUpTime() { return getFileValue<long>("/proc/uptime"); }
 
 class Process {
 public:
@@ -118,8 +145,7 @@ private:
   unordered_map<int, string> uid_user_map;
 };
 
-Process::Process(int pid)
-    : pid(pid), uid_user_map(Uid_User_Map()) {
+Process::Process(int pid) : pid(pid), uid_user_map(Uid_User_Map()) {
   Cpu_Mem_Utime();
   User();
   Command();
@@ -198,16 +224,20 @@ void Process::Cpu_Mem_Utime() {
       uptime = SystemUpTime() - (stat22 / hertz);
       cpu_util = (total_time / hertz) / (uptime + 1 * (uptime == 0));
 
-      cout << "\npid: " << pid << "\n";
-      cout << "stat22 : " << stat22 / hertz << "\n";
-      cout << "sys uptime : " << SystemUpTime() << "\n";
-      cout << "sys uptime - stat22 : " << SystemUpTime() - (stat22 / hertz)
-           << "\n";
+      // cout << "\npid: " << pid << "\n";
+      // cout << "stat22 : " << stat22 / hertz << "\n";
+      // cout << "sys uptime : " << SystemUpTime() << "\n";
+      // cout << "sys uptime - stat22 : " << SystemUpTime() - (stat22 / hertz)
+      //      << "\n";
     }
   }
 }
 
-bool Process::operator<(Process a) const { return this->uptime < a.UpTime(); }
+bool Process::operator<(Process a) const {
+  return a.CpuUtilization() < this->cpu_util;
+}
+
+bool Compare(const Process &a, const Process &b) { return a < b; }
 
 int main() {
   auto pids = Pids();
@@ -220,17 +250,21 @@ int main() {
   }
 
   // Test operator overloading to compare between 2 instances of process
-  // Not working yet
-  // std::sort (processes.begin(), processes.end(), );
+  std::sort(processes.begin(), processes.end(), Compare);
 
+  int loop_iter_counter{0};
   for (auto process : processes) {
+    loop_iter_counter += 1;
     cout << process.Pid() << "\t\t";
     cout << process.User() << "\t\t";
     cout << process.CpuUtilization() << "\t\t";
     cout << process.Ram() << "\t\t";
-    cout << process.UpTime() << "\t\t";
+    cout << ElapsedTime(process.UpTime()) << "\t\t";
     string smallcmd = process.Command();
     cout << smallcmd.substr(0, 30) << "\n";
+    if (loop_iter_counter > 30) {
+      break;
+    }
   }
 
   // Process process(4);
