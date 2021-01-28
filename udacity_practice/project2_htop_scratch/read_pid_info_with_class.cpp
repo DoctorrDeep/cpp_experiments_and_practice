@@ -193,7 +193,7 @@ string findAndReplace(string subject, string lookfor, string replace_with) {
   if (x > subject.size()) {
     return subject;
   }
-  auto y = subject.replace(x, lookfor.length(), replace_with);
+  subject.replace(x, lookfor.length(), replace_with);
   return subject;
 }
 
