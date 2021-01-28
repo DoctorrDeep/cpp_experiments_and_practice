@@ -129,7 +129,7 @@ public:
   int Pid();
   string User();
   string Command();
-  float CpuUtilization();
+  double CpuUtilization();
   string Ram();
   long int UpTime();
   void Cpu_Mem_Utime();
@@ -173,7 +173,7 @@ string Process::Command() {
   return " ";
 };
 
-float Process::CpuUtilization() {
+double Process::CpuUtilization() {
   // Cpu_Mem_Utime();
   return cpu_util;
 };
@@ -187,6 +187,15 @@ long int Process::UpTime() {
   // Cpu_Mem_Utime();
   return uptime;
 };
+
+string findAndReplace(string subject, string lookfor, string replace_with) {
+  auto x = subject.find(lookfor);
+  if (x > subject.size()) {
+    return subject;
+  }
+  auto y = subject.replace(x, lookfor.length(), replace_with);
+  return subject;
+}
 
 void Process::Cpu_Mem_Utime() {
   // https://man7.org/linux/man-pages/man5/proc.5.html
@@ -203,6 +212,9 @@ void Process::Cpu_Mem_Utime() {
   std::ifstream filestream(user_file);
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
+      line = findAndReplace(line, "Web Content", "Web_Content");
+      line = findAndReplace(line, "RDD Process", "RDD_Process");
+      line = findAndReplace(line, "Privileged Cont", "Privileged_Cont");
       std::istringstream linestream(line);
       linestream >> stat1 >> stat2 >> stat3 >> stat4 >> stat5 >> stat6 >>
           stat7 >> stat8 >> stat9 >> stat10 >> stat11 >> stat12 >> stat13 >>
@@ -213,16 +225,10 @@ void Process::Cpu_Mem_Utime() {
           stat42 >> stat43 >> stat44 >> stat45 >> stat46 >> stat47 >> stat48 >>
           stat49 >> stat50 >> stat51 >> stat52;
 
-      // uptime = stat14 + stat15 + stat16 + stat17;
-      // int temp_ram = stat23 / 1000000;
-      // ram = to_string(temp_ram) + " MB";
-      // double temp_seconds = SystemUpTime() - (stat22 / hertz);
-      // cpu_util = 100 * ((uptime / hertz) / temp_seconds);
-
       long int total_time = stat14 + stat15 + stat16 + stat17;
       ram = to_string(stat23 / 1024);
       uptime = SystemUpTime() - (stat22 / hertz);
-      cpu_util = (total_time / hertz) / (uptime + 1 * (uptime == 0));
+      cpu_util = 100 * (total_time / hertz) / (uptime + 1.00 * (uptime == 0));
 
       // cout << "\npid: " << pid << "\n";
       // cout << "stat22 : " << stat22 / hertz << "\n";
@@ -267,7 +273,7 @@ int main() {
     }
   }
 
-  // Process process(4);
+  // Process process(10150);
   // cout << process.Pid() << "\t\t";
   // cout << process.User() << "\t\t";
   // cout << process.CpuUtilization() << "\t\t";
