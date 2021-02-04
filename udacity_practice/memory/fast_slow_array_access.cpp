@@ -8,8 +8,8 @@ int main() {
   // Code to save timestamp before array fillup
   auto t1 = std::chrono::high_resolution_clock::now();
 
-  for (int i; i < size; i++) {
-    for (int j; j < size; j++) {
+  for (int i=0; i < size; i++) {
+    for (int j=0; j < size; j++) {
       x[j][i] = i + j;
       // std::cout << &x[j][i] << ": j = " << j << ": i = " << i << "\n";
       std::cout << &x[j][i] << "\n";
