@@ -18,10 +18,8 @@ int main() {
 
 // Output
 //
-// 0x7ffeb530ac44 0 , Main, Before func call
-// 0x7ffeb530ac28 0 , Inside function, before +3
-// 0x7ffeb530ac28 3 , Inside function, after +3
-// 0x7ffeb530ac44 3 , Main, After func call
-// 0x7ffeb530ac44 5 , Main, After func call, After local increment
-//
-// I expected all to have the same memory address..
+// 0x7ffc57f4c5a4 0 , Main, Before func call
+// 0x7ffc57f4c5a4 0 , Inside function, before +3
+// 0x7ffc57f4c5a4 3 , Inside function, after +3
+// 0x7ffc57f4c5a4 3 , Main, After func call
+// 0x7ffc57f4c5a4 5 , Main, After func call, After local increment

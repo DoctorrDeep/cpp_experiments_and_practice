@@ -23,3 +23,10 @@ int main() {
   CallByReference(i);
   return 0;
 }
+
+//output
+
+// stack bottom: 0x7ffeda8c2274
+// call-by-value: 0x7ffeda8c2254
+// call-by-pointer: 0x7ffeda8c2254
+// call-by-reference: 0x7ffeda8c2254

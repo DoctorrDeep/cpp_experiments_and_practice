@@ -19,3 +19,10 @@ int main() {
 
   return 0;
 }
+
+// Output
+
+// 1: 0x7ffef94dfd8c 
+// 2: 0x7ffef94dfd90 
+// 3: 0x7ffef94dfd64  --> From func call, it is an earlier address than others
+// 4: 0x7ffef94dfd94 
