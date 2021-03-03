@@ -5,7 +5,7 @@ int main(){
 
 // Run by installing valgrind
 // create the binary 
-// `g++ valgrind_test_memory_leak.cpp` // binary called a.out will be created
+// `g++ valgrind_test_memory_leak.cpp -o valgrind_test_memory_leak` // binary called valgrind_test_memory_leak (as opposed to a.out) will be created
 // run valgrind
-// `valgrind --verbose --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-output.txt ./a.out`
+// `valgrind --verbose --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-output.txt ./valgrind_test_memory_leak`
 // contents of log file are a lot , see for yourself
