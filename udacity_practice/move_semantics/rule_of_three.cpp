@@ -70,10 +70,11 @@ int main(){
 
   MyMovableClass obj4 = createObject(20);
   // first createObject creates an instance temporarily in the stack
-  // Then obj4 is populated (not tenporary) by doing a copy operation with the copy constructor
+  // Then obj4 is populated (not tenporary) by doing a copy operation with the copy constructor on the temporary object
   // This copy constructor is NOT going to do the cout (see OUTPUT below) because cout is in 
   // a copy constructor for a temporary object (output of createObject)
-  // 2 expensive copy opeartion: temp data on stack --> temporary object --> obj4 (target destionation)
+  // 2 expensive copy operation: 
+  // temp data on stack (output of `obj(size)`) --> temporary object (output of `createObject(20)`) --> obj4 (target destionation)
 }
 
 // Output
