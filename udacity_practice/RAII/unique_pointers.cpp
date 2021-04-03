@@ -11,7 +11,7 @@ void RawPointer() {
 void UniquePointer() {
   std::unique_ptr<int> my_uniq_ptr(new int); // create a unique pointer on stack
   *my_uniq_ptr = 2;                          // assign a value
-  std::cout << "my_uniq_ptr : " << my_uniq_ptr.get() << "\n";
+  std::cout << "my_uniq_ptr : " << my_uniq_ptr.get() << "\n"; // access internal raw_pointer with `.get()`
   // delete is NOT necessary for unique pointers
   // as soon as `my_uniq_ptr` goes out of scope, it will be deallocated
   // NOTE: ALWAYS create smart pointers in stack, else the scoping mechanism will not work
