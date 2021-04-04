@@ -12,7 +12,7 @@ int main() {
   std::cout << class1.get() << " raw pointer location of class1 with count " << class1.use_count() << "\n";
 
   class1.reset(new MyClass);
-  std::cout << class1.get() << " raw pointer location of class1 AFTER resetwith count " << class1.use_count() << "\n";
+  std::cout << class1.get() << " raw pointer location of class1 AFTER reset with count " << class1.use_count() << "\n";
 
   return 0;
 }
