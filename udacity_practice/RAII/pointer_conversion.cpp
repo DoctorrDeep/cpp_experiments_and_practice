@@ -35,7 +35,7 @@ int main(){
   delete my_raw_ptr1;
   // Contd. from the Use case edsccribed in step (2)
   // here a raw pointer is extraced and an attempt is made to deallocate the memoory
-  // This causes an error because that memeory is being managed by a shared pointer 
+  // This causes an error because that memory is being managed by a shared pointer 
   // and hence cannot be deallocated except with special calls or end-of-scope.
   // NOTE1: it is not possible to convert away from a shared pointer
   // NOTE2: See output below
