@@ -17,7 +17,7 @@ int main(){
   std::cout << my_shr_ptr1.use_count() << ": Shared pointer use_count of my_shr_ptr1\n";
 
   //(2) shared pointer from weak ptr
-  std::weak_ptr<int> my_wk_ptr1(my_shr_ptr1); // create genericc weak pointer
+  std::weak_ptr<int> my_wk_ptr1(my_shr_ptr1); // create generic weak pointer
   std::shared_ptr<int> my_shr_ptr2 = my_wk_ptr1.lock();
   // make a shared pointer from a weak pointer by calling `.lock()
   // Use case: If you need to make sure that the weak pointer you have is 
@@ -33,8 +33,8 @@ int main(){
   //(3) raw pointer from shared (or unique) pointer
   int *my_raw_ptr1 = my_shr_ptr2.get();
   delete my_raw_ptr1;
-  // Contd. from the Use case edsccribed in step (2)
-  // here a raw pointer is extraced and an attempt is made to deallocate the memoory
+  // Contd. from the Use case described in step (2)
+  // here a raw pointer is extraced and an attempt is made to de-allocate the memoory
   // This causes an error because that memory is being managed by a shared pointer 
   // and hence cannot be deallocated except with special calls or end-of-scope.
   // NOTE1: it is not possible to convert away from a shared pointer
