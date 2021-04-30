@@ -15,6 +15,7 @@ void UniquePointer() {
   // delete is NOT necessary for unique pointers
   // as soon as `my_uniq_ptr` goes out of scope, it will be deallocated
   // NOTE: ALWAYS create smart pointers in stack, else the scoping mechanism will not work
+  // delete my_uniq_ptr; ---> This will cause an error because delete expects raw pointer
 }
 
 int main(){

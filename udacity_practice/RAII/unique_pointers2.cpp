@@ -38,7 +38,7 @@ int main() {
 
   // Notice again in the output
   // The destructors for class1 and class2 were not explicitly called here
-  // However the output shows that he destructors were automatically called and 
+  // However the output shows that the destructors were automatically called and
   // the resources of class1 and class2 were let go of.
 
 
@@ -62,11 +62,11 @@ int main() {
 
 // OUTPUT (Memory addresses simplified for readability)
 
-// Unique pointer objects have stack addresses 
+// Unique pointer objects have stack addresses
 // AAAA    class1
 // BBBB    class2
 
-// Raw pointer objects have addresses 
+// Raw pointer objects have addresses
 // CCCC    class3
 // DDDD    class4
 
