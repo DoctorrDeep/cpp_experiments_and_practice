@@ -101,5 +101,7 @@ int main() {
   cout << "\nUnique pointer based ops\n\n";
   MyClass2u* b_class = new MyClass2u();
   cout << b_class->get_class1_handle()->get_say() << std::endl;
+  b_class->get_class1_handle()->set_say("Say what?");
+  cout << b_class->get_class1_handle()->get_say() << std::endl;
   delete b_class;
 }
