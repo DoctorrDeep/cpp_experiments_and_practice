@@ -9,7 +9,7 @@ int main() {
   myWorseFunction(j); // works since j is an lvalue
 
   myWorseFunction(42); // blocks compilation. comment to run case 2
-  // errors because 42 is an rvalue and the finction expected an lvalue
+  // errors because 42 is an rvalue and the function expected an lvalue
   // Output :
   // r_value_references.cpp:9:14: error: cannot bind non-const lvalue reference of type ‘int&’ to an rvalue of type ‘int’
   //   9 |   myWorseFunction(42);

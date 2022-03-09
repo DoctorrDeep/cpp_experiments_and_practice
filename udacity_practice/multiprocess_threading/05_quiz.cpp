@@ -23,12 +23,12 @@ int main() {
     }
   }
 
-  // std::this_thread::sleep_for(std::chrono::milliseconds(10)); // simulate work
+  std::this_thread::sleep_for(std::chrono::milliseconds(10)); // simulate work
   std::cout << "End of main thread is reached." << std::endl;
   return 0;
 }
 
-// Diff types of Output (as is code above)
+// Diff types of Output (as is code above i.e. sleep function in main thread is executed)
 /*
 
 $> bash ./a.out
